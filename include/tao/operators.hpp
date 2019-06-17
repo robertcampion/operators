@@ -406,7 +406,7 @@ namespace tao
       template< typename T, typename U = T >
       class TAO_OPERATORS_BROKEN_EBO equivalent
       {
-         TAO_OPERATORS_NODISCARD friend TAO_OPERATORS_CONSTEXPR bool operator==( const T& lhs, const U& rhs ) noexcept( noexcept( static_cast< bool >( lhs < rhs ), static_cast< bool >( lhs > rhs ) ) )
+         TAO_OPERATORS_NODISCARD friend TAO_OPERATORS_CONSTEXPR bool operator==( const T& lhs, const U& rhs ) noexcept( noexcept( static_cast< bool >( lhs < rhs ) ) && noexcept( static_cast< bool >( lhs > rhs ) ) )
          {
             return !static_cast< bool >( lhs < rhs ) && !static_cast< bool >( lhs > rhs );
          }
@@ -424,12 +424,12 @@ namespace tao
       template< typename T, typename U = T >
       class TAO_OPERATORS_BROKEN_EBO partially_ordered
       {
-         TAO_OPERATORS_NODISCARD friend TAO_OPERATORS_CONSTEXPR bool operator<=( const T& lhs, const U& rhs ) noexcept( noexcept( static_cast< bool >( lhs < rhs ), static_cast< bool >( lhs == rhs ) ) )
+         TAO_OPERATORS_NODISCARD friend TAO_OPERATORS_CONSTEXPR bool operator<=( const T& lhs, const U& rhs ) noexcept( noexcept( static_cast< bool >( lhs < rhs ) ) && noexcept( static_cast< bool >( lhs == rhs ) ) )
          {
             return static_cast< bool >( lhs < rhs ) || static_cast< bool >( lhs == rhs );
          }
 
-         TAO_OPERATORS_NODISCARD friend TAO_OPERATORS_CONSTEXPR bool operator>=( const T& lhs, const U& rhs ) noexcept( noexcept( static_cast< bool >( lhs > rhs ), static_cast< bool >( lhs == rhs ) ) )
+         TAO_OPERATORS_NODISCARD friend TAO_OPERATORS_CONSTEXPR bool operator>=( const T& lhs, const U& rhs ) noexcept( noexcept( static_cast< bool >( lhs > rhs ) ) && noexcept( static_cast< bool >( lhs == rhs ) ) )
          {
             return static_cast< bool >( lhs > rhs ) || static_cast< bool >( lhs == rhs );
          }
@@ -463,12 +463,12 @@ namespace tao
             return static_cast< bool >( rhs < lhs );
          }
 
-         TAO_OPERATORS_NODISCARD friend TAO_OPERATORS_CONSTEXPR bool operator<=( const T& lhs, const T& rhs ) noexcept( noexcept( static_cast< bool >( lhs < rhs ), static_cast< bool >( lhs == rhs ) ) )
+         TAO_OPERATORS_NODISCARD friend TAO_OPERATORS_CONSTEXPR bool operator<=( const T& lhs, const T& rhs ) noexcept( noexcept( static_cast< bool >( lhs < rhs ) ) && noexcept( static_cast< bool >( lhs == rhs ) ) )
          {
             return static_cast< bool >( lhs < rhs ) || static_cast< bool >( lhs == rhs );
          }
 
-         TAO_OPERATORS_NODISCARD friend TAO_OPERATORS_CONSTEXPR bool operator>=( const T& lhs, const T& rhs ) noexcept( noexcept( static_cast< bool >( rhs < lhs ), static_cast< bool >( lhs == rhs ) ) )
+         TAO_OPERATORS_NODISCARD friend TAO_OPERATORS_CONSTEXPR bool operator>=( const T& lhs, const T& rhs ) noexcept( noexcept( static_cast< bool >( rhs < lhs ) ) && noexcept( static_cast< bool >( lhs == rhs ) ) )
          {
             return static_cast< bool >( rhs < lhs ) || static_cast< bool >( lhs == rhs );
          }
